@@ -1,0 +1,63 @@
+name: Deploy PrismMBTI to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build single-file universal HTML
+        run: python scripts/build_html.py
+
+      - name: Run test suite
+        run: npm test
+
+      - name: Prepare GitHub Pages bundle
+        run: |
+          mkdir -p _site/assets
+          cp index.html styles.css _site/
+          cp -r src _site/src
+          cp -r assets/illustrations _site/assets/illustrations
+          cp dist/PrismMBTI.html _site/PrismMBTI.html
+          touch _site/.nojekyll
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "_site"
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build_and_test
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

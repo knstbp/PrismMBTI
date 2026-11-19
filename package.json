@@ -1,0 +1,11 @@
+{
+  "name": "mbti-assessment-web",
+  "version": "1.0.0",
+  "description": "專業、可完整測試、介面友善的繁體中文 MBTI 網頁測驗工具",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build:html": "python scripts/build_html.py"
+  },
+  "keywords": ["mbti", "personality", "assessment", "psychometrics"],
+  "license": "MIT"
+}

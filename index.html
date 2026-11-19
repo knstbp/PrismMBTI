@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>PrismMBTI｜專業人格特質測驗與榮格八維分析</title>
+  <link rel="stylesheet" href="styles.css?v=20261118f" />
+</head>
+<body>
+  <header class="topbar no-print">
+    <div class="container topbar-inner">
+      <button type="button" class="brand" id="btn-brand-home" aria-label="回到首頁">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2L21 7.2V16.8L12 22L3 16.8V7.2L12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M12 2V12M12 12L21 7.2M12 12L3 7.2M12 12V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>PrismMBTI</strong>
+          <small>專業五維度人格測評</small>
+        </span>
+      </button>
+
+      <nav class="topnav" aria-label="主導覽">
+        <button type="button" class="nav-pill is-active" data-nav="home">測驗首頁</button>
+        <button type="button" class="nav-pill" data-nav="catalog">16 型圖鑑</button>
+        <button type="button" class="nav-pill" id="btn-open-history">
+          測驗紀錄 <span class="badge-count" id="history-count-badge">0</span>
+        </button>
+        <button type="button" class="icon-btn" id="btn-theme-toggle" aria-label="切換深淺色主題" title="切換深淺色主題">
+          <span id="theme-icon" aria-hidden="true">☾</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-wrap">
+    <!-- ==================== 1. 首頁視圖 ==================== -->
+    <section id="view-home" class="view is-active">
+      <div class="container">
+        <div id="resume-banner" class="resume-banner hidden" role="region" aria-label="恢復未完成測驗">
+          <div class="resume-info">
+            <span class="resume-dot" aria-hidden="true"></span>
+            <div>
+              <strong>偵測到未完成的測驗進度</strong>
+              <p id="resume-desc">上次作答進度已自動為您保留，可隨時接續完成。</p>
+            </div>
+          </div>
+          <div class="resume-actions">
+            <button type="button" class="btn btn-primary btn-sm" id="btn-resume-quiz">繼續上次測驗</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="btn-discard-draft">捨棄草稿</button>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-top-grid">
+            <div class="hero-intro">
+              <div class="hero-badge">五維人格光譜 × 榮格八維功能分析</div>
+              <h1 class="hero-title">用更精準、立體的視角<br />看見你的思考與行動偏好</h1>
+              <p class="hero-subtitle">
+                結合經典 MBTI 四大向度（E/I、S/N、T/F、J/P）、第五維自我認同（A/T）與榮格八維認知功能推算。題庫採正反雙向平衡與交錯設計，提供即時自動存檔與全方位深度解析。
+              </p>
+            </div>
+            <div class="hero-illustration-wrap">
+              <img
+                src="assets/illustrations/hero-prism.jpg"
+                alt="三位夥伴圍繞稜鏡交流想法的溫暖插畫"
+                class="hero-illustration"
+              />
+            </div>
+          </div>
+
+          <div class="mode-grid">
+            <article class="mode-card mode-card--featured">
+              <div class="mode-card-top">
+                <span class="mode-tag mode-tag--accent">最推薦 · 完整精準</span>
+                <span class="mode-meta">60 題 · 約 6–8 分鐘</span>
+              </div>
+              <h2>標準完整版測驗</h2>
+              <p>五大維度各 12 題（正反極各 6 題），涵蓋社交、決策、職場與情緒壓力情境，有效降低極端與單向偏差，呈現最細緻的百分比光譜。</p>
+              <button type="button" class="btn btn-primary btn-block start-quiz-btn" data-mode="full">
+                開始 60 題完整測驗
+              </button>
+            </article>
+
+            <article class="mode-card">
+              <div class="mode-card-top">
+                <span class="mode-tag">輕量體驗 · 雙向平衡</span>
+                <span class="mode-meta">30 題 · 約 3–4 分鐘</span>
+              </div>
+              <h2>快速精簡版測驗</h2>
+              <p>五大維度各精選 6 題高鑑別度題目（正反極各 3 題），保有量表平衡性，適合想在短時間內快速了解自身輪廓或初步體驗的使用者。</p>
+              <button type="button" class="btn btn-secondary btn-block start-quiz-btn" data-mode="quick">
+                開始 30 題快速測驗
+              </button>
+            </article>
+          </div>
+
+          <div class="display-pref-bar">
+            <span class="pref-label">作答介面偏好：</span>
+            <div class="segmented" role="group" aria-label="作答顯示模式">
+              <button type="button" class="seg-btn is-active" data-layout="paged">分頁清單（每頁 5 題）</button>
+              <button type="button" class="seg-btn" data-layout="single">單題專注（支援鍵盤 1–7）</button>
+            </div>
+          </div>
+        </div>
+
+        <section class="home-features" aria-label="測評特色">
+          <div class="feature-item">
+            <div class="feature-icon" aria-hidden="true">⚖️</div>
+            <h3>正反平衡防偏差</h3>
+            <p>每個維度皆設計等量正向與反向計分題並交錯排列，避免「一路選同意」造成的失真結果。</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon" aria-hidden="true">🧠</div>
+            <h3>榮格八維功能解析</h3>
+            <p>不僅給出四字母標籤，更推算 Ni / Ne / Si / Se / Ti / Te / Fi / Fe 八維認知功能分佈與堆疊。</p>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon" aria-hidden="true">💾</div>
+            <h3>本機隱私自動保存</h3>
+            <p>所有作答進度與測驗紀錄皆僅存於您的瀏覽器本機，無須註冊登入，不傳送個人資料至外部伺服器。</p>
+          </div>
+        </section>
+
+        <section class="temperament-strip" aria-label="四大氣質群組">
+          <div class="section-heading">
+            <h2>四大氣質群組預覽</h2>
+            <button type="button" class="text-link" id="btn-home-to-catalog">查看全部 16 型人格 →</button>
+          </div>
+          <div class="temp-grid" id="home-temperament-grid"></div>
+        </section>
+
+        <footer class="disclaimer-box">
+          <strong>測評說明：</strong>MBTI 是探索自我認知偏好、溝通風格與潛在盲點的反思工具，而非限制能力的標籤。建議依據「真實且長期的自然傾向」作答，而非「理想中的自己」或「工作被迫扮演的樣子」。
+        </footer>
+      </div>
+    </section>
+
+    <!-- ==================== 2. 測驗進行視圖 ==================== -->
+    <section id="view-quiz" class="view">
+      <div class="container quiz-container">
+        <div class="quiz-sticky-header">
+          <div class="quiz-header-top">
+            <div class="quiz-meta-left">
+              <span class="mode-pill" id="quiz-mode-pill">標準完整版 · 60 題</span>
+              <span class="eta-pill" id="quiz-eta-pill">約剩 6 分鐘</span>
+            </div>
+            <div class="quiz-meta-right">
+              <div class="segmented segmented-sm" role="group" aria-label="切換作答介面">
+                <button type="button" class="seg-btn is-active" data-quiz-layout="paged">分頁</button>
+                <button type="button" class="seg-btn" data-quiz-layout="single">單題</button>
+              </div>
+              <button type="button" class="btn btn-ghost btn-sm" id="btn-pause-quiz" title="進度已自動保存">暫存離開</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="btn-reset-quiz">重測</button>
+            </div>
+          </div>
+
+          <div class="progress-row">
+            <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="quiz-progress-bar">
+              <div class="progress-fill" id="quiz-progress-fill" style="width: 0%"></div>
+            </div>
+            <span class="progress-text" id="quiz-progress-text">0 / 60 題 (0%)</span>
+          </div>
+
+          <div class="single-mode-options hidden" id="single-mode-bar">
+            <label class="checkbox-label">
+              <input type="checkbox" id="chk-auto-advance" checked />
+              <span>作答後自動跳至下一題</span>
+            </label>
+            <span class="kbd-hint">快捷鍵：<kbd>1</kbd>~<kbd>7</kbd> 作答 · <kbd>←</kbd><kbd>→</kbd> 切換題目</span>
+          </div>
+        </div>
+
+        <div id="quiz-alert" class="quiz-alert hidden" role="alert"></div>
+
+        <div id="quiz-questions-host" class="questions-host"></div>
+
+        <div class="quiz-footer-nav">
+          <button type="button" class="btn btn-secondary" id="btn-prev-step">← 上一頁</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-toggle-qmap">題目導覽總覽</button>
+          <button type="button" class="btn btn-primary" id="btn-next-step">下一頁 →</button>
+        </div>
+
+        <div id="question-map-panel" class="qmap-panel hidden" aria-label="題目作答狀態總覽">
+          <div class="qmap-header">
+            <strong>快速跳轉題目</strong>
+            <span class="qmap-legend">
+              <i class="dot dot-done"></i> 已作答
+              <i class="dot dot-todo"></i> 未作答
+            </span>
+          </div>
+          <div class="qmap-grid" id="qmap-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 3. 測驗結果報告視圖 ==================== -->
+    <section id="view-result" class="view">
+      <div class="container result-container" id="result-root"></div>
+    </section>
+
+    <!-- ==================== 4. 16 型人格百科圖鑑 ==================== -->
+    <section id="view-catalog" class="view">
+      <div class="container">
+        <div class="catalog-header">
+          <div>
+            <h1>16 型人格圖鑑</h1>
+            <p>依四大氣質群組瀏覽各型態的認知功能堆疊、核心優勢、職涯方向與互動契合度。</p>
+          </div>
+          <div class="catalog-controls">
+            <input type="search" id="catalog-search" class="search-input" placeholder="搜尋代碼或名稱（如 INFJ、建築師）" aria-label="搜尋人格類型" />
+          </div>
+        </div>
+
+        <div class="filter-pills" id="catalog-filters" role="group" aria-label="依氣質群組篩選">
+          <button type="button" class="filter-pill is-active" data-group="ALL">全部 16 型</button>
+          <button type="button" class="filter-pill" data-group="NT">分析家 (NT)</button>
+          <button type="button" class="filter-pill" data-group="NF">外交家 (NF)</button>
+          <button type="button" class="filter-pill" data-group="SJ">守護者 (SJ)</button>
+          <button type="button" class="filter-pill" data-group="SP">探險家 (SP)</button>
+        </div>
+
+        <div class="catalog-grid" id="catalog-grid"></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== 歷史紀錄抽屜 ==================== -->
+  <div id="history-backdrop" class="drawer-backdrop hidden no-print" aria-hidden="true"></div>
+  <aside id="history-drawer" class="drawer hidden no-print" role="dialog" aria-modal="true" aria-labelledby="history-drawer-title">
+    <div class="drawer-header">
+      <h2 id="history-drawer-title">測驗歷史紀錄</h2>
+      <button type="button" class="icon-btn" id="btn-close-history" aria-label="關閉歷史紀錄">✕</button>
+    </div>
+    <div class="drawer-body" id="history-list"></div>
+    <div class="drawer-footer">
+      <button type="button" class="btn btn-ghost btn-sm text-danger" id="btn-clear-history">清空所有紀錄</button>
+    </div>
+  </aside>
+
+  <!-- ==================== 類型詳細介紹 Modal (從圖鑑或契合類型點擊開啟) ==================== -->
+  <div id="type-modal-backdrop" class="modal-backdrop hidden no-print" aria-hidden="true"></div>
+  <div id="type-modal" class="modal hidden no-print" role="dialog" aria-modal="true" aria-labelledby="type-modal-title">
+    <div class="modal-header">
+      <h2 id="type-modal-title">人格類型詳情</h2>
+      <button type="button" class="icon-btn" id="btn-close-type-modal" aria-label="關閉視窗">✕</button>
+    </div>
+    <div class="modal-body" id="type-modal-body"></div>
+  </div>
+
+  <!-- Toast 通知 -->
+  <div id="toast" class="toast hidden no-print" role="status" aria-live="polite"></div>
+
+  <script defer src="src/data/questions.js"></script>
+  <script defer src="src/data/types.js"></script>
+  <script defer src="src/data/extendedProfilesA.js"></script>
+  <script defer src="src/data/extendedProfilesB.js"></script>
+  <script defer src="src/data/illustrations.js"></script>
+  <script defer src="src/data/literatureModels.js?v=20261118e"></script>
+  <script defer src="src/engine/scoring.js?v=20261118d"></script>
+  <script defer src="src/engine/advancedReport.js?v=20261118d"></script>
+  <script defer src="src/engine/reportImage.js?v=20261118g"></script>
+  <script defer src="src/app.js?v=20261118f"></script>
+</body>
+</html>
